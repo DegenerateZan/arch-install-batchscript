@@ -7,15 +7,17 @@ echo "WARNING!!! USE THE DOS/MBR IF YOUR BIOS DOES NOT SUPPORT UEFI, AND ONLY SU
 echo "ALSO DONT FORGET TO TURN ON THE BOOTABLE FLAG!!! OTHERWISE YOUR SYSTEM WOULD NOT BOOT!!"
 fdisk /dev/sda
 
-mkfs.ext4 /dev/root_partition
+mkfs.ext4 /dev/sda
 
-#uncomment the line below me if you want to use the swap partition
+echo "create your swap partition!"
 
-#mkswap /dev/swap_partition
+cfdisk
 
-mount /dev/root_partition /mnt
+mkswap /dev/sda2
 
-swapon /dev/swap_partition
+mount /dev/sda1 /mnt
+
+swapon /dev/sda2
 
 pacstrap /mnt base linux-zen linux-zen-headers nano gedit grub network-manager dhcpcd sudo htop git
 
