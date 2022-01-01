@@ -19,7 +19,7 @@ mount /dev/sda1 /mnt
 
 swapon /dev/sda2
 
-pacstrap /mnt base linux-zen linux-zen-headers nano gedit grub dhcpcd sudo htop git
+pacstrap /mnt base linux-zen linux-zen-headers nano gedit grub dhcpcd sudo htop git iw net-tools
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
