@@ -23,6 +23,8 @@ pacstrap /mnt base linux-zen linux-zen-headers nano gedit grub dhcpcd sudo htop 
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
+echo "WARNING!! THE INSTALLATION IS STILL NOT COMPLETED YET, YOU NEED TO TYPE : sh autoinstallstep2.sh 
+echo " TO CONTINUE THE INSTALLATION!! "
 arch-chroot /mnt
 
 ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
