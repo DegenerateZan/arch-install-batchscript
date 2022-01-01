@@ -38,3 +38,9 @@ cat /etc/locale.gen >> /etc/locale.conf
 
 echo "SET YOUR ROOT PASSWORD!!!"
 passwd
+
+exit
+
+umount -R /mnt
+
+reboot
