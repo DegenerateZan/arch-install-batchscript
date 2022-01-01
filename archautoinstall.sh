@@ -19,7 +19,7 @@ mount /dev/sda1 /mnt
 
 swapon /dev/sda2
 
-pacstrap /mnt base linux-zen linux-zen-headers nano gedit grub network-manager dhcpcd sudo htop git
+pacstrap /mnt base linux-zen linux-zen-headers nano gedit grub dhcpcd sudo htop git
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
@@ -33,6 +33,8 @@ echo "uncoment one of your locale"
 nano /etc/locale.gen
 
 locale-gen
+
+touch /etc/locale.conf
 
 cat /etc/locale.gen >> /etc/locale.conf
 
