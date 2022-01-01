@@ -39,6 +39,11 @@ cat /etc/locale.gen >> /etc/locale.conf
 echo "SET YOUR ROOT PASSWORD!!!"
 passwd
 
+echo "installing the grub"
+
+grub-install --target=i386-pc /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+
 exit
 
 umount -R /mnt
