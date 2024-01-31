@@ -56,7 +56,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 exit
 ' >> /mnt/tmp/autoinstallstep2.sh
 
-arch-chroot /mnt /tmp/autoinstallstep2.sh
+arch-chroot /mnt bash
 
 umount -R /mnt
 
