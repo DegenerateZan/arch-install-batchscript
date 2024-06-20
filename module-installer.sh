@@ -17,7 +17,7 @@ sha256sums=('SKIP')
 
 echo "Step 1: Update package list and install necessary dependencies"
 sudo apt-get update
-sudo apt-get install -y git build-essential linux-headers-$(uname -r)
+sudo apt-get install -y git build-essential linux-headers-$(uname -r) gcc-aarch64-linux-gnu
 
 echo "Step 2: Clone the repository"
 git clone https://github.com/jwrdegoede/$_pkgname.git -b rtl8189fs
@@ -27,18 +27,23 @@ echo "Step 3: Get the kernel version"
 _KVER=$(uname -r)
 echo "Kernel version: $_KVER"
 
-echo "Step 4: Build the module"
-make ARCH=arm64 KSRC="/lib/modules/$_KVER/build/"
+echo "Step 4: Rebuild 'fixdep' utility"
+cd /usr/src/linux-headers-$_KVER
+make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- scripts
+
+echo "Step 5: Build the module"
+cd ~/$_pkgname
+make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- KSRC="/lib/modules/$_KVER/build/"
 gzip -9 8189fs.ko
 
-echo "Step 5: Install the module"
+echo "Step 6: Install the module"
 sudo install -d /lib/modules/$_KVER/extra/
 sudo install -m644 8189fs.ko.gz /lib/modules/$_KVER/extra/8189fs.ko.gz
 
-echo "Step 6: Update module dependencies"
+echo "Step 7: Update module dependencies"
 sudo depmod -a
 
-echo "Step 7: Clean up"
+echo "Step 8: Clean up"
 cd ..
 rm -rf $_pkgname
 
